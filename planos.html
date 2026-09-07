@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OGA - Revisor de Planos</title>
+  <link rel="stylesheet" href="css_planos.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo">OGA</div>
+    <button class="nav active" id="tabRevisor">🔗 REVISOR DE<br>PLANOS</button>
+    <button class="nav" id="tabHistorial">🔗 LISTA DE<br>PLANOS REVISADOS</button>
+    <button class="nav" id="tabDistribucion">REVISION<br>DISTRIBUCION<br>DE LAMINA</button>
+    <a href="dashboard.html" class="salir">↪ Salir</a>
+  </aside>
+
+  <main class="app">
+    <!-- VISTA REVISOR -->
+    <section id="viewRevisor" class="view layout">
+      <section class="panel image-panel">
+        <div class="topline">
+          <h3>IMAGEN</h3>
+          <div class="actions">
+            <label class="btn blue">+ CARGAR PLANO PDF<input id="pdfInput" type="file" accept="application/pdf" hidden></label>
+            <button class="btn blue" id="clearBtn">LIMPIAR</button>
+            <button class="btn green" id="reviewBtn">REVISAR</button>
+          </div>
+        </div>
+        <div class="file-name" id="fileName">(NOMBRE DEL PLANO CARGADO)</div>
+        <div class="viewer" id="viewer"><div>VISOR DEL PLANO CARGADO<br>AJUSTABLE EN TAMAÑO Y PODER<br>MOVERSE POR LAS HOJAS</div></div>
+        <div class="download-row"><a class="btn green hidden" id="downloadCurrent" href="/download/current">DESCARGAR EXCEL ACTUAL</a></div>
+      </section>
+
+      <section class="side side-a">
+        <section class="panel table-card small-card">
+          <h3>ENSAMBLES ENCONTRADOS (EN)</h3>
+          <input class="search" placeholder="🔍 Buscar en referencias..." data-filter="EN">
+          <div class="table-scroll"><table><thead><tr><th>CÓDIGO</th><th>TIENE PLANO</th><th>N° HOJA</th></tr></thead><tbody id="tbodyEN"></tbody></table></div>
+        </section>
+        <section class="panel table-card small-card">
+          <h3>PERFILES ENCONTRADOS (PF)</h3>
+          <input class="search" placeholder="🔍 Buscar en referencias..." data-filter="PF">
+          <div class="table-scroll"><table><thead><tr><th>CÓDIGO</th><th>TIENE PLANO</th><th>N° HOJA</th></tr></thead><tbody id="tbodyPF"></tbody></table></div>
+        </section>
+        <section class="panel table-card small-card">
+          <h3>PIEZAS ENCONTRADAS (PZ)</h3>
+          <input class="search" placeholder="🔍 Buscar en referencias..." data-filter="PZ">
+          <div class="table-scroll"><table><thead><tr><th>CÓDIGO</th><th>TIENE PLANO</th><th>N° HOJA</th></tr></thead><tbody id="tbodyPZ"></tbody></table></div>
+        </section>
+        <section class="panel table-card small-card">
+          <h3>PIEZAS FRAME</h3>
+          <input class="search" placeholder="🔍 Buscar en referencias..." data-filter="FRAME">
+          <div class="table-scroll"><table><thead><tr><th>CÓDIGO</th><th>DESCRIPCIÓN</th><th>TIENE PLANO</th><th>N° HOJA</th></tr></thead><tbody id="tbodyFRAME"></tbody></table></div>
+        </section>
+      </section>
+
+      <section class="side side-b">
+        <section class="panel table-card lamina-card">
+          <h3>LAMINA ENCONTRADA (LM)</h3>
+          <input class="search" placeholder="🔍 Buscar en referencias..." data-filter="LM">
+          <div class="table-scroll"><table><thead><tr><th>CÓDIGO</th><th>TIENE PLANO</th><th>CANT</th><th>ESPESOR</th><th>AREA</th></tr></thead><tbody id="tbodyLM"></tbody></table></div>
+          <div class="table-scroll summary-scroll"><table class="summary"><thead><tr><th>CALIBRE</th><th>ESPESOR</th><th>AREA</th></tr></thead><tbody id="tbodyLaminaGroup"></tbody></table></div>
+        </section>
+        <section class="panel table-card standard-card">
+          <h3>LISTA DE ELEMENTOS ESTANDAR</h3>
+          <input class="search" placeholder="🔍 Buscar en referencias..." data-filter="ESTANDAR">
+          <div class="table-scroll"><table><thead><tr><th>CÓDIGO</th><th>DESCRIPCIÓN</th><th>CANT</th></tr></thead><tbody id="tbodySTD"></tbody></table></div>
+        </section>
+      </section>
+    </section>
+
+    <!-- VISTA HISTORIAL -->
+    <section id="viewHistorial" class="view hidden">
+      <section class="panel history-panel">
+        <div class="topline"><h2>PLANOS REVISADOS</h2></div>
+        <p>Cada vez que oprime <b>Revisar</b>, se guarda un Excel en la carpeta <b>planos_revisados</b>.</p>
+        <div class="table-scroll history-scroll"><table class="history-table"><thead><tr><th>Archivo Excel</th><th>Fecha</th><th>Tamaño</th><th>Descargar</th><th>Eliminar</th></tr></thead><tbody id="historyBody"></tbody></table></div>
+      </section>
+    </section>
+
+    <!-- VISTA DISTRIBUCIÓN -->
+    <section id="viewDistribucion" class="view hidden layout-dist">
+      <section class="panel image-panel">
+        <div class="topline">
+          <h3>IMAGEN</h3>
+          <div class="actions">
+            <label class="btn blue">+ CARGAR PLANO PDF<input id="distPdfInput" type="file" accept="application/pdf" hidden></label>
+            <button class="btn blue" id="distClearBtn">LIMPIAR</button>
+            <button class="btn green" id="distReviewBtn">REVISAR</button>
+          </div>
+        </div>
+        <div class="file-name" id="distFileName">(NOMBRE DEL PLANO CARGADO)</div>
+        <div class="viewer" id="distViewer"><div>VISOR DEL PLANO CARGADO<br>AJUSTABLE EN TAMAÑO Y PODER<br>MOVERSE POR LAS HOJAS</div></div>
+      </section>
+      <section class="dist-side">
+        <section class="panel table-card yellow-head">
+          <label class="dist-upload">CARGAR LISTA EN EXCEL (LM)<input id="lmExcelInput" type="file" accept=".xlsx,.xlsm" hidden></label>
+          <input class="search" placeholder="🔍 Buscar en referencias..." data-dist-filter="lmExcelBody">
+          <div class="table-scroll"><table><thead><tr><th>CÓDIGO</th><th>CANT</th><th>ESPESOR</th></tr></thead><tbody id="lmExcelBody"></tbody></table></div>
+        </section>
+        <section class="panel table-card yellow-head">
+          <label class="dist-upload">CARGAR LISTA DE EXCEL (DXF)<input id="dxfExcelInput" type="file" accept=".xlsx,.xlsm" hidden></label>
+          <input class="search" placeholder="🔍 Buscar en referencias..." data-dist-filter="dxfExcelBody">
+          <div class="table-scroll"><table><thead><tr><th>CÓDIGO</th><th>CANT</th><th>ESPESOR</th></tr></thead><tbody id="dxfExcelBody"></tbody></table></div>
+        </section>
+        <section class="panel table-card found-lm">
+          <h3>LAMINAS ENCONTRADAS</h3>
+          <input class="search" placeholder="🔍 Buscar en referencias..." data-dist-filter="foundLmBody">
+          <div class="table-scroll"><table><thead><tr><th>CÓDIGO</th><th>TIENE PLANO</th><th>HOJA</th><th>CANT LM</th><th>CANT DXF</th><th>ESP LM</th><th>ESP DXF</th><th>DIFERENCIA ENCONTRADA</th></tr></thead><tbody id="foundLmBody"></tbody></table></div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

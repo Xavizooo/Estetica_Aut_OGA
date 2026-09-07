@@ -1,0 +1,219 @@
+:root {
+  --oga-bg-dark: #070d1b;      /* Azul medianoche profundo idéntico al sitio */
+  --oga-card-bg: #0b132b;      /* Azul un poco más claro para tarjetas */
+  --oga-border: rgba(255, 255, 255, 0.08);
+  --oga-blue: #1d4ed8;         /* Azul corporativo elegante de acento */
+  --oga-blue-hover: #2563eb;
+  --text-white: #ffffff;
+  --text-gray: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--oga-bg-dark);
+  color: var(--text-white);
+}
+
+.oga-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header Superior Estilo OGA */
+.oga-header {
+  height: 80px;
+  background-color: var(--oga-bg-dark);
+  border-bottom: 1px solid var(--oga-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.logo-text {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--text-white);
+}
+
+.sub-logo {
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  color: var(--text-gray);
+  text-transform: uppercase;
+}
+
+.oga-nav {
+  display: flex;
+  gap: 25px;
+}
+
+.oga-nav a {
+  color: var(--text-gray);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.oga-nav a:hover, .oga-nav a.active {
+  color: var(--text-white);
+}
+
+.oga-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Botones con estética OGA */
+.btn-oga-outline, .btn-oga-solid {
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-oga-outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-white);
+}
+
+.btn-oga-outline:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-oga-solid {
+  background-color: var(--oga-blue);
+  border: 1px solid var(--oga-blue);
+  color: var(--text-white);
+}
+
+.btn-oga-solid:hover {
+  background-color: var(--oga-blue-hover);
+}
+
+.btn-oga-solid.small {
+  padding: 6px 12px;
+  font-size: 0.75rem;
+}
+
+/* Contenido Principal */
+.oga-main {
+  padding: 40px;
+  flex: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-title-section {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.hero-title-section h1 {
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.hero-title-section p {
+  color: var(--text-gray);
+  font-size: 0.95rem;
+}
+
+/* Grid de Secciones */
+.oga-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.oga-card {
+  background-color: var(--oga-card-bg);
+  border: 1px solid var(--oga-data-border, var(--oga-border));
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.oga-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  color: var(--text-white);
+}
+
+.card-desc {
+  color: var(--text-gray);
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+}
+
+.table-placeholder-box {
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-gray);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Visor de Planos */
+.blueprint-screen {
+  background-color: #040812;
+  border-radius: 6px;
+  height: 350px;
+  border: 1px solid var(--oga-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.blueprint-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-gray);
+}
+
+.blueprint-content svg {
+  stroke: var(--oga-blue);
+}
+
+@media(max-width: 1100px) {
+  .oga-grid {
+    grid-template-columns: 1fr;
+  }
+  .oga-header {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+    gap: 15px;
+  }
+  .oga-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
