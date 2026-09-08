@@ -91,12 +91,12 @@ body {
 
 .btn-oga-outline {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(26, 85, 248, 0.829);
   color: var(--text-white);
 }
 
 .btn-oga-outline:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(26, 85, 248, 0.829);
 }
 
 .btn-oga-solid {
